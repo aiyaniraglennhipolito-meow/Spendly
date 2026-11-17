@@ -1,4 +1,4 @@
-# Spendly Prompt Log
+Spendly Prompt Log
 
 ## Entry 1: Plan the app
 
