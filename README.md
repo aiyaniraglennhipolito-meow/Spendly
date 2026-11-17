@@ -1,10 +1,8 @@
-Put a `README.md` file in the same folder as `index.html`, `style.css`, and `script.js`. Here’s a template based on Spendly. Replace the bracketed parts, and only mark tests as passed after you’ve done them.
-
 # Spendly Expense Tracker
 
 ## Project information
 
-- **Student:** [Your name]
+- **Student:** Aiya Nira Glenn V. Hipolito
 - **Course and section:** CC211 — BSIT 2A
 - **GitHub repository:** https://github.com/aiyaniraglenhipolito-meow/Spendly
 
