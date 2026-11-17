@@ -1,5 +1,3 @@
-Sure—here’s a simpler version. It describes Spendly, but the prompts are **reconstructed examples**, not the exact words you typed before. Change anything that doesn’t match what you really did.
-
 # Spendly Prompt Log
 
 ## Entry 1: Plan the app
