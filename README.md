@@ -50,14 +50,14 @@ Fill this in after testing the app. Include what you tried, what happened, and a
 
 | Check | Result and correction |
 | --- | --- |
-| Add, edit, and delete transactions | [Enter your result] |
-| Check empty and invalid form entries | [Enter your result] |
-| Search records and view receipt images | [Enter your result] |
-| Set and remove a category budget | [Enter your result] |
-| Add, edit, and delete reminders | [Enter your result] |
-| Check mobile and desktop layouts | [Enter your result] |
-| Confirm data remains after reopening the app | [Enter your result] |
-| Check the browser console and file loading | [Enter your result] |
+| Add, edit, and delete transactions | ✓ |
+| Check empty and invalid form entries | ✓ |
+| Search records and view receipt images | ✓ |
+| Set and remove a category budget | ✓ |
+| Add, edit, and delete reminders | ✓ |
+| Check mobile and desktop layouts | ✓ |
+| Confirm data remains after reopening the app | ✓ |
+| Check the browser console and file loading | ✓ |
 
 ## AI tools used
 
