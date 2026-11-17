@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Spendly | Expense Tracker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.9/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-yEPZ7jP9S0QKiUQ0m3jjsO4ProIW7wvR9gXkI7JOGa2XVsw53Yke2bsdkBbjmmiX" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <div class="app">
+      <aside class="side">
+        <a class="brand" href="#home">💸 Spendly</a>
+        <nav class="nav" aria-label="Main">
+          <a href="#home" data-v="home"><b aria-hidden="true">🏠</b><span>Home</span></a>
+          <a href="#receipts" data-v="receipts"><b aria-hidden="true">🧾</b><span>Receipts</span></a>
+          <a href="#statistics" data-v="statistics"><b aria-hidden="true">📊</b><span>Statistics</span></a>
+          <a href="#reminders" data-v="reminders"><b aria-hidden="true">🔔</b><span>Reminders</span><em id="dueN" hidden></em></a>
+        </nav>
+        <a class="add" href="#add" id="newBtn" aria-label="Add transaction"><b aria-hidden="true">＋</b><span>Add transaction</span></a>
+      </aside>
+      <div class="content">
+        <header class="top">
+          <h1 id="ttl">Home</h1>
+          <div class="gear"><button class="ib" id="gearBtn" type="button" aria-label="Settings" aria-haspopup="true" aria-expanded="false">⚙️</button>
+            <div class="menu" id="menu" hidden><button type="button" id="sampleBtn">Reset to sample data</button><button type="button" id="clearBtn">Delete all data</button>
+            </div>
+          </div>
+        </header>
+        <main id="main" class="container-fluid" tabindex="-1">
+          <section class="view" id="v-home">
+            <div class="grid2">
+              <div>
+                <p class="bl">Balance</p>
+                <p class="bal" id="bal">
+                </p>
+                <div class="mcard">
+                  <h2 id="mT">
+                  </h2>
+                  <dl class="trio">
+                    <div>
+                      <dt>Expense</dt>
+                      <dd id="mE">
+                      </dd>
+                    </div>
+                    <div>
+                      <dt class="w">Balance</dt>
+                      <dd id="mB">
+                      </dd>
+                    </div>
+                    <div>
+                      <dt class="l">Income</dt>
+                      <dd id="mI">
+                      </dd>
+                    </div>
+                  </dl>
+                  <div class="chart" id="ch1" role="group" aria-label="Spending by month. Select a month.">
+                  </div>
+                </div>
+              </div>
+              <div class="panel">
+                <div class="row sb">
+                  <h2 id="hT">Today</h2>
+                  <div class="seg" id="tabs" role="group" aria-label="Period"><button type="button" data-t="today">Today</button><button type="button" data-t="weekly">Weekly</button><button type="button" data-t="monthly">Monthly</button>
+                  </div>
+                </div>
+                <div id="hList">
+                </div>
+              </div>
+            </div>
+          </section>
+          <section class="view" id="v-add" hidden>
+            <div class="panel narrow">
+              <h2 id="aH">Add new transaction</h2>
+              <form id="aF" novalidate>
+                <div class="tseg" role="group" aria-label="Transaction type" style="margin-top:1rem"><input type="radio" name="atype" id="tE" value="expense" checked><label for="tE">Expense</label><input type="radio" name="atype" id="tI" value="income"><label for="tI">Income</label>
+                </div>
+                <label for="a-date">Date</label><input id="a-date" type="date" class="form-control"><small class="err" id="e-a-date"></small>
+                <label for="a-cat">Category</label><select id="a-cat" class="form-select"></select><small class="err" id="e-a-cat"></small>
+                <label for="a-desc">Description <i>(optional)</i></label><input id="a-desc" maxlength="80" placeholder="e.g. Clothes and watch" autocomplete="off" class="form-control"><small class="err" id="e-a-desc"></small>
+                <label for="a-amt">Total (₱)</label><input id="a-amt" type="number" step="0.01" inputmode="decimal" placeholder="0.00" class="form-control"><small class="err" id="e-a-amt"></small>
+                <p class="mut" id="rl" style="margin:.9rem 0 .4rem;font-weight:600;color:var(--ink)">Expense receipt images <i style="font-weight:500">(optional, up to 2)</i>
+                </p>
+                <div class="two" role="group" aria-labelledby="rl">
+                  <div><input type="file" accept="image/*" id="f0" class="sr" aria-label="Receipt image 1"><label class="drop" for="f0" id="d0"></label><button type="button" class="lk" id="x0" hidden>Remove image 1</button>
+                  </div>
+                  <div><input type="file" accept="image/*" id="f1" class="sr" aria-label="Receipt image 2"><label class="drop" for="f1" id="d1"></label><button type="button" class="lk" id="x1" hidden>Remove image 2</button>
+                  </div>
+                </div><small class="err" id="e-img"></small>
+                <div class="two btns"><button type="button" class="btn out" id="aCancel">Cancel</button><button type="submit" class="btn btn-primary" id="aSave">Save</button>
+                </div>
+              </form>
+            </div>
+          </section>
+          <section class="view" id="v-receipts" hidden>
+            <div class="grid2">
+              <div class="panel"><label class="sr" for="q">Search receipts</label><input id="q" type="search" placeholder="Search category, description or date" class="form-control">
+                <p class="mut" id="cnt" style="margin:.6rem 0" aria-live="polite">
+                </p>
+                <div id="rcL">
+                </div>
+              </div>
+              <div class="panel" id="det" aria-live="polite">
+              </div>
+            </div>
+          </section>
+          <section class="view" id="v-reminders" hidden>
+            <div class="grid2">
+              <div class="panel">
+                <h2 id="rH">Add reminder</h2>
+                <form id="rF" novalidate>
+                  <label for="r-date">Date</label><input id="r-date" type="date" class="form-control"><small class="err" id="e-r-date"></small>
+                  <label for="r-cat">Category</label><select id="r-cat" class="form-select"></select><small class="err" id="e-r-cat"></small>
+                  <label for="r-desc">Description <i>(optional)</i></label><input id="r-desc" maxlength="80" placeholder="e.g. Water tax" autocomplete="off" class="form-control"><small class="err" id="e-r-desc"></small>
+                  <label for="r-time">Time</label><input id="r-time" type="time" class="form-control"><small class="err" id="e-r-time"></small>
+                  <div class="two btns"><button type="button" class="btn out" id="rCancel" hidden>Cancel</button><button type="submit" class="btn btn-primary" id="rSave">Save</button>
+                  </div>
+                </form>
+              </div>
+              <div class="panel">
+                <h2 style="margin-bottom:.5rem">Upcoming reminders</h2>
+                <ul class="l" id="rL">
+                </ul>
+              </div>
+            </div>
+          </section>
+          <section class="view" id="v-statistics" hidden>
+            <div class="chips" id="chips" role="group" aria-label="Category">
+            </div>
+            <div class="grid2">
+              <div>
+                <div class="mcard">
+                  <div class="mnav"><button type="button" class="mb" id="prev" aria-label="Previous month">‹</button>
+                    <h2 id="sT">
+                    </h2><button type="button" class="mb" id="next" aria-label="Next month">›</button>
+                  </div>
+                  <dl class="trio">
+                    <div>
+                      <dt>Expense</dt>
+                      <dd id="sE">
+                      </dd>
+                    </div>
+                    <div>
+                      <dt class="w">Balance</dt>
+                      <dd id="sB">
+                      </dd>
+                    </div>
+                    <div>
+                      <dt class="l">Budget</dt>
+                      <dd id="sU">
+                      </dd>
+                    </div>
+                  </dl>
+                  <div class="chart" id="ch2" role="group" aria-label="Spending by month. Select a month.">
+                  </div>
+                </div>
+                <div class="panel" style="margin-top:1.5rem">
+                  <h2>Monthly budget</h2>
+                  <form id="bF" novalidate><label for="b-in">Budget for <span id="bC"></span> (₱)</label>
+                    <div class="inp"><input id="b-in" type="number" step="0.01" inputmode="decimal" placeholder="e.g. 5000" class="form-control"><button class="btn btn-primary" type="submit" id="bSave">Save</button><button class="btn out" type="button" id="bClr">Remove</button>
+                    </div>
+                    <small class="err" id="e-b-in"></small>
+                    <p class="mut" id="bH" style="margin-top:.5rem">
+                    </p>
+                  </form>
+                </div>
+              </div>
+              <div class="panel">
+                <h2 id="sH" style="margin-bottom:.5rem">Spending</h2>
+                <div id="sList">
+                </div>
+              </div>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+    <div class="toasts" id="toasts">
+    </div>
+    <dialog id="dlg" aria-label="Confirm">
+      <form method="dialog">
+        <p id="dmsg" style="flex-basis:100%">
+        </p><button class="btn out" value="no">Cancel</button><button class="btn" value="ok">Yes, continue</button>
+      </form>
+    </dialog>
+    <!-- Bootstrap JavaScript bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.9/dist/js/bootstrap.bundle.min.js" integrity="sha384-WyOxWvTyr1QaMPfiPJSv76iReVthorl5uWlFtZPyK0IE0hB0hGzo9y5Bp9mYanr8Bu" crossorigin="anonymous" defer></script>
+    <script src="script.js" defer></script>
+  </body>
+</html>
